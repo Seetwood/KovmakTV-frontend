@@ -1,0 +1,26 @@
+<div class="main">
+  <div class="navigation">
+    <app-navigation></app-navigation>
+  </div>
+  
+  <div class="content">
+      <div class="namePage">
+        Личный кабинет
+      </div>
+      <div class="dataUser">
+        <mat-label class="username">{{user.username}}</mat-label>
+  
+        <mat-form-field style="width: 250px; border-radius: 10px;">
+          <mat-label style="color: black; border-radius: 10px;">Имя</mat-label>
+          <input matInput placeholder="Имя" style="border-radius: 10px;" [(ngModel)]="user.name">
+        </mat-form-field>
+  
+        <mat-form-field style="width: 250px;">
+          <mat-label style="color: black;">Фамилия</mat-label>
+          <input matInput placeholder="Фамилия" [(ngModel)]="user.surname">
+        </mat-form-field>
+        <button mat-raised-button class="button" (click)="updateDataUser()">Сохранить все</button>
+        <!-- <button mat-raised-button class="button" (click)="deleteProfile()">Удалить профиль</button> -->
+      </div>
+  </div>
+</div>

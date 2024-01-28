@@ -1,0 +1,28 @@
+<div class="header">
+  <div class="pageName">Ковмак TV</div>
+  <div class="navigation">
+    <div class="navButton">
+      <button [routerLink]="['/index']" id="color" mat-button>Главная</button>
+      <button  [routerLink]="['/filmsPoster']" id="color" mat-button>Киноафиша</button>
+    <button id="color" mat-button (click)="pageMyReviews()">Мои рецензии</button>
+    </div>
+  </div>
+
+  <div class="iconProfile">
+    <button *ngIf="isAuth(); else unset" mat-button #menuTrigger="matMenuTrigger" (mouseover)="openMenuProfile(menuTrigger)"
+      [matMenuTriggerFor]="menu" id="color" style="font-size: 16px; font-family: fantasy; padding-right: 50px;"><mat-icon style="transform: scale(3);">account_circle</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/profile']">Личный кабинет</button>
+      <button mat-menu-item [routerLink]="['/admin-panel']" *ngIf="isAdmin()">Панель администратора</button>
+      <button (click)="logout()" mat-menu-item>Выйти из профиля</button>
+    </mat-menu>
+  </div>
+
+  <ng-template #unset>
+    <div class="iconProfile">
+      <button mat-button [routerLink]="['/login']" id="color" style="font-size: 16px; font-family: fantasy;"><mat-icon style="transform: scale(1.5);">person</mat-icon>Войти
+      </button>
+    </div>
+  </ng-template>
+</div>

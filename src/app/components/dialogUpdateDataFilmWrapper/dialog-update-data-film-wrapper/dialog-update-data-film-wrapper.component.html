@@ -1,0 +1,39 @@
+<h1 mat-dialog-title style="text-align: center;">Изменение данных фильма</h1>
+<div mat-dialog-content class="main">
+  
+  <mat-form-field class="input">
+    <mat-label>Название</mat-label>
+    <input matInput type="text" placeholder="Название" [(ngModel)]="updateFilm.name" required>
+  </mat-form-field>
+  
+  <mat-form-field class="input">
+    <mat-label>Год выхода</mat-label>
+    <input matInput type="text" placeholder="Год выхода" [(ngModel)]="updateFilm.yearOfRelease" required>
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Страна производства</mat-label>
+    <input matInput type="text" placeholder="Страна производства" [(ngModel)]="updateFilm.country" required>
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Жанр</mat-label>
+    <mat-select [(ngModel)]="selectedGenre" name="genre" required>
+      <mat-option *ngFor="let currentGenre of genres" [value]="currentGenre">{{ currentGenre.genreName }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field class="input">
+    <mat-label>Длительность в минутах</mat-label>
+    <input matInput type="text" placeholder="Длительность" [(ngModel)]="updateFilm.duration" required>
+  </mat-form-field>
+
+  <mat-form-field class="inputDescription">
+    <mat-label>Описание</mat-label>
+    <textarea matInput placeholder="Описание" [(ngModel)]="updateFilm.description"></textarea>
+  </mat-form-field>
+
+</div>
+<div mat-dialog-actions style="display: flex; justify-content: center;">
+  <button class="right-align" mat-raised-button color="primary"  (click)="updateFilmData()">Обновить</button>
+</div>

@@ -1,0 +1,28 @@
+<div id = "container">
+<div class="main">
+    <div class="name">Авторизация</div>
+    <div class="form">
+        <mat-form-field style="width: 300px;margin-bottom: 10px">
+            <mat-label>Введите свой логин</mat-label>
+            <input matInput #log maxlength="10" placeholder="Логин" [(ngModel)]="credential.username">
+            <mat-hint align="end" style="color: aliceblue;">{{log.value.length}}/10</mat-hint>
+        </mat-form-field>
+        <mat-form-field style="width: 300px">
+            <mat-label>Введите свой пароль</mat-label>
+            <input matInput #pass maxlength="16" placeholder="Пароль" [(ngModel)]="credential.password" [type]="hide ? 'password' : 'text'">
+            <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            <mat-hint align="end" style="color: aliceblue;">{{pass.value.length}}/16</mat-hint>
+        </mat-form-field>
+        <div *ngIf="errorAuth" style="font-size: 11pt; color: red; padding: 0; margin: 0;">
+            Неправильный логин или пароль
+        </div>
+    </div>
+    <div class="button">
+        <button mat-button (click)="login()">Войти</button>
+        <button mat-button [routerLink]="['/registration']">Регистрация</button>
+    </div>
+</div>
+</div>
+    

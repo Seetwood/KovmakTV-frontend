@@ -1,0 +1,54 @@
+<div class="main">
+  <div class="navigation">
+    <app-navigation></app-navigation>
+  </div>
+  <div class="content">
+    <div style="padding-top: 20px;">
+      <div class="header">Рецензия</div>
+      <div class="reviews-list">
+        <div class="user-review"> {{ review.name }} {{ review.surname }} </div>
+        <div class="header-review"> {{ review.header }} </div>
+        <div class="text-review"> {{ review.textReview }} </div>
+      </div>
+    </div>
+    <div class="subheader">Комментарии</div>
+    <ng-template #recursiveList let-comments>
+      <div *ngFor="let comment of comments">
+        <div class="comment">
+          <div class="user-comment"> {{ comment.nameSender }} {{ comment.surnameSender }} </div>
+          <div class="text-comment"> {{ comment.textComment }} </div>
+          <label (click)="openForm(comment)" class="button-reply">Ответить</label>
+          <div *ngIf="comment.showForm" class="input-form">
+            <div style="margin: 10px;">
+              <mat-form-field class="input-text" style="width: 350px;">
+                <mat-label style="color: black;">Введите текст комментария</mat-label>
+                <textarea matInput placeholder="Текст комментария" [(ngModel)]="newCommentForComment.textComment" required
+                  style=" max-height: 100px;width: 300px;"></textarea>
+              </mat-form-field>
+              <div class="buttons-form">
+                <button mat-raised-button (click)="createCommentForComment(comment.id)"
+                  style="margin-right: 5px;">Отправить</button>
+                <button mat-raised-button (click)="closeForm(comment)">Закрыть</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <ul *ngIf="comment.childComments.length > 0">
+          <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: comment.childComments }"></ng-container>
+        </ul>
+      </div>
+    </ng-template>
+    <ng-container *ngTemplateOutlet="recursiveList; context:{ $implicit: comments }"></ng-container>
+
+    <div style="margin: 10px;">
+      <mat-form-field class="input-text" style="width: 350px;">
+        <mat-label style="color: black;">Введите текст комментария</mat-label>
+        <textarea matInput placeholder="Текст комментария" [(ngModel)]="newCommentForReview.textComment" required
+          style=" max-height: 100px;width: 300px;"></textarea>
+      </mat-form-field>
+      <div class="buttons-form">
+        <button mat-raised-button (click)="createCommentForReview()" style="margin-right: 5px;">Отправить</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,75 @@
+<div class="main">
+  <div class="navigation">
+    <app-navigation></app-navigation>
+  </div>
+  <div class="content"
+    infinite-scroll (scrolled)="onScroll()"
+    [infiniteScrollDisabled]="currentPageReview >= totalPagesReview - 1">
+    <div class="descriptionFilm">
+      <div>
+        <img class="film-image" [src]="img" alt="Film Image">
+        <div id="video-container" style="padding-left: 20px;"></div>
+      </div>
+
+      <div>
+        <div class="film-tittle">{{ film.name }}</div>
+        <div class="heading">О фильме</div>
+        <table class="specifications-table">
+          <tbody>
+            <tr>
+              <td>Год создания</td>
+              <td>{{ film.yearOfRelease }}</td>
+            </tr>
+            <tr>
+              <td>Страна</td>
+              <td>{{ film.country }}</td>
+            </tr>
+            <tr>
+              <td>Жанр</td>
+              <td>{{ film.genre.genreName }}</td>
+            </tr>
+            <tr>
+              <td>Длительность</td>
+              <td>{{ film.duration }} минут</td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="heading">Описание</div>
+        <div class="description">{{ film.description }}</div>
+        <button mat-raised-button class="button" *ngIf="isAdmin()" (click)="updateFilm(film)">Обновить данные</button>
+      </div>
+
+    </div>
+    <div style="padding-top: 20px;">
+      <div class="heading">Медиа</div>
+      <div class="media-list">
+        <div class="media-item" *ngFor="let image of film.imagesList">
+          <img [src]="url + image.imageUrl" alt="Film Image">
+        </div>
+        <div class="media-item" *ngFor="let video of film.videosList">
+          <video controls style="width: 270px; border-radius: 10px;">
+            <source [src]="url + video.traillerUrl" type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-top: 20px;">
+      <div class="heading">Рецензии</div>
+      <button mat-raised-button class="button-create-review" (click)="createReview()">+ Написать рецензию</button>
+      <div class="reviews-list">
+        <div *ngFor="let review of reviews" class="review">
+          <div class="user-review"> {{ review.name }} {{ review.surname }} </div>
+          <div class="header-review"> {{ review.header }} </div>
+          <div class="text-review" [ngClass]="{'expanded': review.showFullReviewText}"> {{ review.textReview }} </div>
+          <button mat-raised-button style="margin-left: 20px; margin-top: 10px;" (click)="toggleExpand(review)">
+            {{ review.showFullReviewText ? 'Свернуть' : 'Развернуть' }}
+          </button>
+          <button mat-raised-button style="margin-left: 20px; margin-top: 10px;"
+            [routerLink]="['/review', review.id]">Комментарии</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

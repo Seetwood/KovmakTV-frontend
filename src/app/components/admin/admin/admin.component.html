@@ -1,0 +1,24 @@
+<div class="main">
+    <div class="navigation">
+      <app-navigation></app-navigation>
+    </div>
+  
+    <div class="content">
+      <div style="display: flex; justify-content: space-between;">
+        <div class="heading">Рецензии:</div>
+        <button mat-raised-button class="button-add-film" (click)="createFilm()">Добавить фильм</button>
+      </div>
+      <div class="reviews-list">
+        <div *ngFor="let review of reviews" class="review">
+          <div class="filmName-review"> {{ review.filmName }} </div>
+          <div class="user-review"> {{ review.name }} {{ review.surname }} </div>
+          <div class="header-review"> {{ review.header }} </div>
+          <div class="text-review"> {{ review.textReview }} </div>
+          <div class="button-container">
+            <button mat-raised-button class="button-review" (click)="verifiedReview(review.userId, review.filmId, review)">Одобрить</button>
+            <button mat-raised-button class="button-review" (click)="rejectedReview(review.userId, review.filmId, review)">Отклонить</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

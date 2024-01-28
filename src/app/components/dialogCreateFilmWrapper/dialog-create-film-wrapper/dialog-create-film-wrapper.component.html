@@ -1,0 +1,68 @@
+<div class="header">Создание нового фильма</div>
+<div mat-dialog-content class="main">
+    <div class="container">
+        <div class="input-forms">
+            <mat-form-field class="input">
+                <mat-label>Название</mat-label>
+                <input matInput type="text" placeholder="Название" [(ngModel)]="form.name" required>
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Год выхода</mat-label>
+                <input matInput type="text" placeholder="Год выхода" [(ngModel)]="form.yearOfRelease" required>
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Страна производства</mat-label>
+                <input matInput type="text" placeholder="Страна производства" [(ngModel)]="form.country" required>
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Жанр</mat-label>
+                <mat-select [(ngModel)]="selectedGenre" name="genre" required>
+                    <mat-option *ngFor="let currentGenre of genres"
+                        [value]="currentGenre">{{currentGenre.genreName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field class="input">
+                <mat-label>Длительность в минутах</mat-label>
+                <input matInput type="text" placeholder="Длительность" [(ngModel)]="form.duration" required>
+            </mat-form-field>
+            <mat-form-field class="input-description">
+                <mat-label>Описание</mat-label>
+                <textarea matInput placeholder="Описание" [(ngModel)]="form.description"></textarea>
+            </mat-form-field>
+            <button mat-raised-button class="create-film-button" (click)="createFilm()">Добавить фильм</button>
+            <div class="new-genre-container">
+                <mat-form-field class="input">
+                    <mat-label>Новый жанр</mat-label>
+                    <input matInput type="text" placeholder="Новый жанр" [(ngModel)]="newGenre.genreName">
+                </mat-form-field>
+                <button mat-raised-button class="create-genre-button" (click)="createGenre()">Добавить жанр</button>
+            </div>
+        </div>
+
+        <div class="files">
+            <div class="container-files">
+                <img *ngIf="imagefile.length !== 0" [src]="imagefile[0]" alt="Uploaded Image" class="image-main"
+                    (click)="deleteImage(0)" style="height: 150px;">
+                <video *ngFor="let videoFile of videofile; let i=index" [src]="videoFile" controls
+                    style="height: 150px;"></video>
+                <div class="no-image-main-size" *ngIf="imagefile.length < 1"><mat-icon>insert_photo</mat-icon></div>
+                <div class="mini-images-container">
+                    <div *ngFor="let imageFile of imagefile; let i=index">
+                        <div *ngIf="i > 0">
+                            <img [src]="imageFile" alt="Uploaded Image" class="image" (click)="deleteImage(i)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="file-upload">
+                <input type="file" class="file-input" accept=".jpg, .jpeg, .png" (change)="onImageSelected($event)"
+                    #imageUpload />
+                <button mat-button class="file-buttons" (click)="imageUpload.click()">Добавить фото</button>
+
+                <input type="file" class="file-input" accept=".mp4, .avi" (change)="onVideoSelected($event)"
+                    #videoUpload />
+                <button mat-button class="file-buttons" (click)="videoUpload.click()">Добавить видео</button>
+            </div>
+        </div>
+    </div>
+</div>

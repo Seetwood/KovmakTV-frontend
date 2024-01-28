@@ -1,0 +1,13 @@
+<div id = "container">
+  <div class="navigation">
+    <app-navigation></app-navigation>
+  </div>
+
+<div class="slick-wrapper">
+  <ngx-slick-carousel class="carousel" #slickModal="slick-carousel" [config]="slideConfigGenres">
+    <div ngxSlickItem *ngFor="let genre of genres" class="slide">
+      <div class="genreСards" (click)="movieFilter(genre.genreName)">{{ genre.genreName }}</div>
+    </div>
+  </ngx-slick-carousel>
+</div>
+</div>

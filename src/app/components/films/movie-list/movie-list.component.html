@@ -1,0 +1,11 @@
+<div id="container">
+  <div class="navigation">
+    <app-navigation></app-navigation>
+  </div>
+  <div class="movie-list"
+    infinite-scroll
+    (scrolled)="onScroll()"
+    [infiniteScrollDisabled]="currentPage >= totalPages - 1">
+    <app-movie-card *ngFor="let film of films" [film]="film" (click)="navigateToFilmPage(film)"></app-movie-card>
+  </div>
+</div>
