@@ -41,7 +41,7 @@ export class DialogAddReviewWrapperComponent implements OnInit {
       });
       return;
     }
-    this.reviewService.createReview(this.filmId, this.newReview).subscribe(response => {
+    this.reviewService.createReview(this.filmId, this.newReview).subscribe(() => {
       console.log('Рецензия успешно создана');
       this.dialogRef.close();
     }, error => {

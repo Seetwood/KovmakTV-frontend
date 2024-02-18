@@ -135,7 +135,7 @@ export class AuthService {
   };
 
   private handleLoginError<T>(operation = 'operation', result?: T) {
-    console.log('handleLoginError')
+    console.log('handleLoginError');
     return (error: any): Observable<T> => {
       if(error.status === 401) {
         this.loggedIn.next(false);
@@ -145,9 +145,7 @@ export class AuthService {
         this.loggedIn.next(false);
         // @ts-ignore
         return of (
-          {
-            errorStatus: error.status
-          }
+          {errorStatus: error.status}
         );
       }
       return of(result as T);

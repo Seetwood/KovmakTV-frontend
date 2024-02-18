@@ -113,11 +113,6 @@ export class PageFilmComponent implements OnInit {
         data: this.filmId,
         autoFocus: false,
       });
-      dialogAddReviewWrapper.afterClosed().subscribe(() => {
-        this.reviewService.getVerifiedReviewByFilm(this.filmId, this.currentPageReview = 0, this.pageSizeReview = 5).subscribe(newReview => {
-          this.reviews = newReview;
-        });
-      });
     }
     else {
       this.dialog.open(DialogInformationWrapperComponent, {

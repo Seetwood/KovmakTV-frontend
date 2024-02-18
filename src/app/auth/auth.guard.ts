@@ -21,10 +21,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       return this.authService.isLoggedIn.pipe(
         take(1),
         map((isLoggedIn: boolean) => {
-          if(!isLoggedIn) {
-            this.redirectToLogin();
-            return false;
-          }
           const loggedUser: CredentialResponse = this.authService.LoggedUser;
           if(loggedUser != null && loggedUser.authenticated) {
             for (let role in ROLE) {
@@ -32,9 +28,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
               loggedUser.authorities.forEach(el => checkAuthRole = el.authority == role);
               if(checkAuthRole) {
                 let access = AuthService.checkAuthUser(loggedUser, ROLE_MAPPER[role]);
-                if(!access && checkAuthRole) {
-                  this.redirectToLogin();
-                }
                 return access;
               }
             }
@@ -42,10 +35,6 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           return false;
         })
       );
-  }
-
-  private redirectToLogin() {
-    this.router.navigate(['login']);
   }
 
   canActivateChild(
@@ -59,5 +48,4 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     segments: UrlSegment[]): Observable<boolean> | Promise<boolean> | boolean {
     return true;
   }
-
 }

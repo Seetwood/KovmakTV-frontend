@@ -87,7 +87,7 @@ export class DialogCreateFilmWrapperComponent {
   }
   createGenre() {
     if (this.newGenre && this.newGenre.genreName) {
-      this.genreService.createGenre(this.newGenre).subscribe((genre: Genre) => {
+      this.genreService.createGenre(this.newGenre).subscribe(() => {
       });
     }
   }

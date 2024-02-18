@@ -31,9 +31,11 @@ export class NavigationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.userService.getUser().subscribe(data => {
-      this.userId = data.id;
-    });
+    if(this.isAuth()){
+      this.userService.getUser().subscribe(data => {
+        this.userId = data.id;
+      });
+    }
   }
   
   openMenuProfile(menuTrigger: MatMenuTrigger) {
